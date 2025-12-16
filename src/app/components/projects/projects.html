@@ -1,3 +1,152 @@
-<div class="projects">
-    vuybiop^l$
-</div>
+<section class="projects-hero" [class.full-screen]="!selectedProject">
+    <div class="title-section">
+        @if (!selectedProject) {
+            <h1>MES</h1>
+            <h1>PROJETS</h1>
+        } @else {
+            <h1 class="project-title-detail">{{ selectedProject.title }}</h1>
+        }
+    </div>
+</section>
+
+@if (!selectedProject) {
+    <section class="projects-carousel-section" 
+            (window:mouseup)="onMouseUp()"
+            (window:touchend)="onMouseUp()"
+            (window:mousemove)="onMouseMove($event)"
+            (window:touchmove)="onTouchMove($event)">
+        
+        <div class="carousel-container" (mousedown)="onMouseDown($event, 'top')" (touchstart)="onTouchStart($event, 'top')">
+            <div class="carousel-track" #trackTop>
+                @for (project of projectsTop; track $index) {
+                    <app-project-card
+                        [title]="project.title"
+                        [description]="project.description"
+                        [imageUrl]="project.imageUrl"
+                        (viewDetails)="navigateToProject(project)">
+                    </app-project-card>
+                }
+                @for (project of projectsTop; track $index) {
+                    <app-project-card
+                        [title]="project.title"
+                        [description]="project.description"
+                        [imageUrl]="project.imageUrl"
+                        (viewDetails)="navigateToProject(project)">
+                    </app-project-card>
+                }
+            </div>
+        </div>
+
+        <div class="drag-separator">
+            <div class="line"></div>
+            <span class="hint-text">DRAG & DROP TO EXPLORE</span>
+            <div class="line"></div>
+        </div>
+
+        <div class="carousel-container" (mousedown)="onMouseDown($event, 'bottom')" (touchstart)="onTouchStart($event, 'bottom')">
+            <div class="carousel-track" #trackBottom>
+                @for (project of projectsBottom; track $index) {
+                    <app-project-card
+                        [title]="project.title"
+                        [description]="project.description"
+                        [imageUrl]="project.imageUrl"
+                        (viewDetails)="navigateToProject(project)">
+                    </app-project-card>
+                }
+                @for (project of projectsBottom; track $index) {
+                    <app-project-card
+                        [title]="project.title"
+                        [description]="project.description"
+                        [imageUrl]="project.imageUrl"
+                        (viewDetails)="navigateToProject(project)">
+                    </app-project-card>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@if (selectedProject && activeGalleryImage) {
+    <section class="project-detail-view">
+        <button class="btn-back" (click)="closeProjectDetail()">← Retour aux projets</button>
+
+        <div class="detail-container">
+            <div class="detail-gallery">
+                <div class="main-image-wrapper" 
+                     [class.is-maquette]="activeGalleryImage.isMaquette"
+                     #maquetteContainer
+                     (mousemove)="onMaquetteMouseMove($event, maquetteContainer, imgRef)"
+                     (mouseleave)="onMaquetteMouseLeave()">
+                    
+                    <img [src]="activeGalleryImage.url" 
+                         alt="Image principale" 
+                         class="main-img"
+                         #imgRef
+                         [style.transform]="activeGalleryImage.isMaquette ? maquetteTransform : 'none'">
+                </div>
+
+                <div class="thumbnails">
+                    @for (imgObj of projectImages; track imgObj.url) {
+                        <div class="thumb-wrapper" 
+                             [class.active]="imgObj === activeGalleryImage"
+                             (click)="setActiveImage(imgObj)">
+                            <img [src]="imgObj.url" alt="Miniature">
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="detail-info">
+                <div class="info-header">
+                    <h2>À propos</h2>
+                    <p class="description">{{ selectedProject.description }}</p>
+                    
+                    @if (selectedProject.challenge) {
+                        <div class="challenge-box">
+                            <h4>Challenge</h4>
+                            <p>{{ selectedProject.challenge }}</p>
+                        </div>
+                    }
+                </div>
+
+                <div class="specs-grid">
+                    @if (selectedProject.client) {
+                        <div class="spec-item"><label>Client</label><span>{{ selectedProject.client }}</span></div>
+                    }
+                    @if (selectedProject.year) {
+                        <div class="spec-item"><label>Année</label><span>{{ selectedProject.year }}</span></div>
+                    }
+                    @if (selectedProject.duration) {
+                        <div class="spec-item"><label>Durée</label><span>{{ selectedProject.duration }}</span></div>
+                    }
+                    @if (selectedProject.role) {
+                        <div class="spec-item"><label>Rôle</label><span>{{ selectedProject.role }}</span></div>
+                    }
+                </div>
+
+                <div class="technologies">
+                    <label>Technologies</label>
+                    <div class="tags">
+                        @for (tech of selectedProject.technologies; track $index) {
+                            <span class="tech-tag">{{ tech }}</span>
+                        }
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    @if (selectedProject.buttons) {
+                        @for (btn of selectedProject.buttons; track $index) {
+                            <a [href]="btn.link" 
+                               target="_blank" 
+                               class="btn-base"
+                               [class.btn-primary]="btn.type === 'primary'"
+                               [class.btn-secondary]="btn.type === 'secondary'">
+                               {{ btn.label }}
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,15 @@
+<div class="card">
+	<div class="card-image" [style.backgroundImage]="imageUrl ? 'url(' + imageUrl + ')' : 'none'"></div>
+
+	<div class="card-content">
+		<div class="text-group">
+			<h3>{{ title }}</h3>
+            
+            <div class="desc-wrapper" [class.truncated]="isTruncated">
+			    <p #descText>{{ description }}</p>
+            </div>
+		</div>
+
+		<a href="#" (click)="onViewDetails($event)" class="btn-details">Voir le projet</a>
+	</div>
+</div>
