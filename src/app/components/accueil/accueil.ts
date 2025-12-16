@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
 	styleUrl: './accueil.scss',
 })
 export class Accueil {
+	scrollToTechnologies() {
+		const element = document.getElementById('technologies');
 
+		if (element) {
+			element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	}
 }

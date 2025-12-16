@@ -42,14 +42,11 @@
             border: none;
             font-family: "ClashGrotesk-Semibold";
             white-space: nowrap;
-            
             border-top: 3px solid transparent;
             border-bottom: 3px solid transparent;
             border-right: 3px solid #6F040E;
             border-left: 3px solid #6F040E;
-            
             transition: all 0.3s ease;
-            cursor: pointer;
 
             &:hover {
                 border: 3px solid #6F040E;
@@ -167,6 +164,7 @@
                 width: 20px;
                 height: 20px;
                 stroke: currentColor;
+                background-color: white;
             }
         }
 

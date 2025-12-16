@@ -1,14 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Accueil } from './components/accueil/accueil';
 import { Navbar } from './components/navbar/navbar';
+import { Accueil } from './components/accueil/accueil';
+import { Technologies } from './components/technologies/technologies';
 
 @Component({
 	selector: 'app-root',
 	imports: [
 		RouterOutlet,
+		Navbar,
 		Accueil,
-		Navbar
+		Technologies
 	],
 	templateUrl: './app.html',
 	styleUrl: './app.scss'
