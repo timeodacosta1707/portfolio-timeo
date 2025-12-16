@@ -1,4 +1,3 @@
-// --- SECTION 1 : HERO ---
 .projects-hero {
     height: 50vh;
     min-height: 400px;
@@ -58,7 +57,6 @@
         }
     }
 
-    // Adaptation Hero Mobile
     @media (max-width: 1024px) {
         background-position: center;
 
@@ -88,7 +86,6 @@
 }
 
 
-// --- VUE LISTE ---
 .projects-carousel-section {
     background-color: #101010;
     padding: 100px 0;
@@ -169,7 +166,6 @@
     }
 }
 
-// --- VUE DÉTAIL ---
 .project-detail-view {
     background-color: #101010;
     padding: 0 80px 100px 80px;
@@ -200,7 +196,6 @@
         align-items: start;
     }
 
-    // --- GALERIE ---
     .detail-gallery {
         display: flex;
         flex-direction: column;
@@ -217,7 +212,6 @@
             background-color: #1E1E1E;
             position: relative;
 
-            // --- STYLE IMAGE PAR DÉFAUT ---
             .main-img {
                 width: 100%;
                 height: auto;
@@ -227,7 +221,6 @@
                 transition: transform 0.1s linear;
             }
 
-            // --- STYLE MAQUETTE ---
             &.is-maquette {
                 height: 500px;
                 cursor: ns-resize;
@@ -286,7 +279,7 @@
 
     .detail-info {
         color: #fff;
-        width: 100%; // Sécurité responsive
+        width: 100%;
 
         .info-header {
             width: 100%;
@@ -304,8 +297,8 @@
             line-height: 1.6;
             color: #d0d0d0;
             margin-bottom: 30px;
-            width: 100%; // Évite le dépassement
-            overflow-wrap: break-word; // Casse les mots trop longs
+            width: 100%;
+            overflow-wrap: break-word;
         }
 
         .challenge-box {
@@ -393,7 +386,6 @@
             }
         }
 
-        // --- GESTION DES BOUTONS DESKTOP ---
         .actions {
             display: flex;
             flex-wrap: wrap;
@@ -414,7 +406,7 @@
                 cursor: pointer;
                 transition: background 0.3s, transform 0.2s, border-color 0.3s;
 
-                white-space: nowrap; // Empêche le texte de se casser
+                white-space: nowrap;
                 flex: 1;
                 min-width: fit-content;
                 box-sizing: border-box;
@@ -459,12 +451,10 @@
 }
 
 
-// --- ADAPTATION MOBILE ET TABLETTE (max 1024px) ---
 @media (max-width: 1024px) {
     .project-detail-view {
-        // Réduction du padding global
         padding: 20px 20px 60px 20px;
-        min-height: auto; // On laisse le contenu définir la hauteur
+        min-height: auto;
 
         .btn-back {
             margin-bottom: 20px;
@@ -474,60 +464,51 @@
 
         .detail-container {
             display: flex;
-            flex-direction: column; // Empilement vertical
+            flex-direction: column;
             gap: 40px;
         }
 
-        // --- ADAPTATION GALERIE MOBILE ---
         .detail-gallery {
             width: 100%;
 
             .main-image-wrapper {
-                // On garde une hauteur raisonnable pour voir le début du contenu texte
                 max-height: 50vh;
                 border-radius: 8px;
 
-                // CAS SPÉCIFIQUE MAQUETTE SUR MOBILE
-                // On désactive le script JS et on active le scroll natif
                 &.is-maquette {
-                    height: 450px; // Hauteur fixe pour la zone
-                    overflow-y: auto; // Scroll vertical natif avec le doigt
-                    cursor: default; // Pas de curseur de redimensionnement
-
-                    // Style de la barre de défilement pour mobile
+                    height: 450px;
+                    overflow-y: auto;
+                    cursor: default;
                     scrollbar-width: thin;
                     scrollbar-color: #6F040E #1E1E1E;
 
                     .main-img {
-                        position: static; // Annule le positionnement absolu du script
+                        position: static;
                         width: 100%;
-                        height: auto; // L'image reprend sa taille réelle en hauteur
+                        height: auto;
                         max-height: unset;
-                        transform: none !important; // Force l'annulation du transform JS
+                        transform: none !important;
                         object-fit: contain;
                     }
                 }
 
-                // Image classique (non maquette)
                 &:not(.is-maquette) .main-img {
                     max-height: 50vh;
-                    object-fit: cover; // Ou contain selon préférence
+                    object-fit: cover;
                 }
             }
 
             .thumbnails {
-                // Scroll horizontal fluide pour les miniatures
                 padding-bottom: 5px;
                 gap: 10px;
 
                 .thumb-wrapper {
-                    width: 80px; // Un peu plus petit sur mobile
+                    width: 80px;
                     height: 60px;
                 }
             }
         }
 
-        // --- ADAPTATION INFO MOBILE ---
         .detail-info {
             .info-header {
                 h2 {
@@ -542,8 +523,8 @@
             }
 
             .specs-grid {
-                grid-template-columns: 1fr 1fr; // On garde 2 colonnes
-                gap: 15px 10px; // Gap réduit
+                grid-template-columns: 1fr 1fr;
+                gap: 15px 10px;
                 padding: 15px 0;
 
                 .spec-item {
@@ -564,14 +545,13 @@
                 }
             }
 
-            // Boutons pleine largeur pour faciliter le clic tactile
             .actions {
                 flex-direction: column;
                 gap: 15px;
 
                 .btn-base {
                     width: 100%;
-                    padding: 18px 0; // Zone de clic plus confortable
+                    padding: 18px 0;
                     font-size: 1rem;
                 }
             }
