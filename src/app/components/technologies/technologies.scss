@@ -1,11 +1,16 @@
 @import url("../../../../public/fonts/css/fonts.css");
 
+/* --- CORRECTION ICI : Application sur le host --- */
 :host {
     display: block;
+    margin-top: -2px; /* Remonte le composant entier sur la section précédente */
+    position: relative; 
+    z-index: 10; /* S'assure qu'il passe au-dessus du bas de l'image si besoin */
 }
+/* ----------------------------------------------- */
 
 .technologies {
-    background-color: #101010; /* Fond très sombre */
+    background-color: #101010;
     padding: 100px 20px;
     min-height: 80vh;
     display: flex;
@@ -30,7 +35,7 @@
         align-items: center;
         max-width: 900px;
         width: 100%;
-        padding: 40px; /* Espace pour que les éléments rotatés ne sortent pas */
+        padding: 40px;
     }
 
     .tech-card {
@@ -42,7 +47,6 @@
         transition: all 0.4s ease-out;
         position: relative;
         
-        /* --- STYLE VISUEL --- */
         .icon-wrapper {
             width: 80px; 
             height: 80px;
@@ -54,7 +58,6 @@
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
-                /* Effet fantôme gris par défaut */
                 filter: grayscale(100%) brightness(40%);
                 opacity: 0.6; 
                 transition: all 0.4s ease;
@@ -62,7 +65,6 @@
         }
 
         span {
-            /* Texte caché par défaut */
             opacity: 0;
             position: absolute;
             bottom: -25px;
@@ -74,7 +76,6 @@
             white-space: nowrap;
         }
 
-        /* --- LE CHAOS ORGANISÉ (Positionnement aléatoire) --- */
         &:nth-child(odd) {
             margin: 30px;
             width: 100px;
@@ -104,7 +105,6 @@
              margin-right: 60px;
         }
 
-        /* --- INTERACTION (HOVER) --- */
         &:hover {
             z-index: 10;
             transform: scale(1.2) rotate(0deg) !important; 
@@ -122,7 +122,6 @@
     }
 }
 
-/* === STYLE DE LA POPUP === */
 .modal-overlay {
     position: fixed;
     top: 0;

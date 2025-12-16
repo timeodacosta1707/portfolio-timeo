@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { Accueil } from './components/accueil/accueil';
 import { Technologies } from './components/technologies/technologies';
+import { Footer } from './components/footer/footer';
 
 @Component({
 	selector: 'app-root',
@@ -10,7 +11,8 @@ import { Technologies } from './components/technologies/technologies';
 		RouterOutlet,
 		Navbar,
 		Accueil,
-		Technologies
+		Technologies,
+		Footer
 	],
 	templateUrl: './app.html',
 	styleUrl: './app.scss'

@@ -1,5 +1,9 @@
 .hero-container {
-    background-image: url('/images/BG.png');
+    /* --- CORRECTION ICI : Dégradé ajouté par-dessus l'image --- */
+    /* Cela crée un fondu vers le noir (#101010) sur les derniers 15% de la hauteur */
+    background-image: linear-gradient(to bottom, rgba(16, 16, 16, 0) 85%, #101010 100%), url('/images/BG.png');
+    /* --------------------------------------------------------- */
+    
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
@@ -11,6 +15,7 @@
     padding-top: 80px;
     box-sizing: border-box;
     background-position: 75% center;
+    background-color: #101010;
 
     @media (min-width: 1024px) {
         background-position: center center;

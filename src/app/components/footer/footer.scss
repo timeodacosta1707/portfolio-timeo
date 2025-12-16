@@ -1,0 +1,53 @@
+.footer {
+    background-color: #0D0D0D;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    .logo {
+        width: 150px;
+        height: 150px;
+        filter: brightness(0.32);
+    }
+    .liens-rapides {
+        h1 {
+            font-size: 50px;
+            color: #6F040E;
+            font-family: "Anton-Regular";
+        }
+        .liens {
+            display: flex;
+            flex-direction: column;
+            line-height: 45px;
+            a {
+                text-decoration: none;
+                color: #525252;
+                font-size: 40px;
+                font-family: "Anton-Regular";
+                transition: all 0.3s ease;
+                &:hover {
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+    .contact-me {
+        h1 {
+            font-size: 50px;
+            color: #6F040E;
+            font-family: "Anton-Regular";
+        }
+        .icons {
+            display: flex;
+            gap: 35px;
+            justify-content: center;
+            img {
+                width: 50px;
+                height: auto;
+                transition: all 0.3s ease;
+                &:hover {
+                    filter: brightness(0) invert(100%),
+                }
+            }
+        }
+    }
+}
