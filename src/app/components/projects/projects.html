@@ -64,10 +64,17 @@
                 (mousemove)="onMaquetteMouseMove($event, maquetteContainer)" (mouseleave)="onMaquetteMouseLeave()">
 
                 @if (activeGalleryMedia.type === 'video') {
+
+                @if (activeGalleryMedia.isGif) {
+                <video [src]="activeGalleryMedia.url" autoplay loop muted playsinline class="main-video">
+                </video>
+                } @else {
                 <iframe [src]="activeGalleryMedia.url" title="Video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen class="main-video">
                 </iframe>
+                }
+
                 } @else {
                 <img [src]="activeGalleryMedia.url" alt="Image principale" class="main-img" #imgRef
                     [style.transform]="activeGalleryMedia.isMaquette ? maquetteTransform : 'none'">
@@ -147,17 +154,30 @@
 
             <div class="actions">
                 @if (selectedProject.buttons) {
-                    @for (btn of selectedProject.buttons; track $index) {
-                        <a [attr.href]="btn.disabled ? null : btn.link" [attr.target]="btn.disabled ? null : '_blank'"
-                            class="btn-base" [class.btn-primary]="btn.type === 'primary'"
-                            [class.btn-secondary]="btn.type === 'secondary'" [class.disabled]="btn.disabled"
-                            [attr.aria-disabled]="btn.disabled">
-                            {{ btn.label }}
-                        </a>
-                    }
+                @for (btn of selectedProject.buttons; track $index) {
+                <a [attr.href]="btn.disabled ? null : btn.link" [attr.target]="btn.disabled ? null : '_blank'"
+                    class="btn-base" [class.btn-primary]="btn.type === 'primary'"
+                    [class.btn-secondary]="btn.type === 'secondary'" [class.disabled]="btn.disabled"
+                    [attr.aria-disabled]="btn.disabled">
+                    {{ btn.label }}
+                </a>
+                }
                 }
             </div>
         </div>
+    </div>
+</section>
+}
+
+@if (!selectedProject) {
+<section class="cta-section">
+    <div class="cta-content">
+        <h2>UN PROJET EN TÊTE ?</h2>
+        <p>Transformons vos idées en réalité digitale.</p>
+        <a href="mailto:dacostatimeo@gmail.com" class="cta-btn">
+            <span>ME CONTACTER</span>
+            <div class="hover-effect"></div>
+        </a>
     </div>
 </section>
 }

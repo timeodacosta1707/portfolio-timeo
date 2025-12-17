@@ -9,6 +9,7 @@ export interface ProjectMedia {
 	url: string | SafeResourceUrl;
 	thumbnailUrl?: string;
 	isMaquette?: boolean;
+	isGif?: boolean;
 }
 
 interface ProjectButton {
@@ -153,6 +154,97 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 			buttons: [
 				{ label: "Voir le site (A venir)", link: "A venir", type: "primary", disabled: true }
 			]
+		},
+		{
+			title: 'Blender - Pub Range Rover',
+			description: 'Réalisation d\'une publicité pour la marque de voiture Range Rover. Ce projet était un projet purement personnel car le monde de la 3D m\'intrigue et m\a toujours passionné.',
+			imageUrl: '/images/projets/RangeRover/image4.png',
+			technologies: ['Blender'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/RangeRover/image2.png' },
+				{ type: 'image', url: '/images/projets/RangeRover/image3.png' },
+				{ type: 'video', url: 'https://app.videas.fr/embed/media/b3d7b674-20d2-464b-b2b4-1ae6ce3c7ac5/', thumbnailUrl: "/images/projets/RangeRover/image1.png" },
+			],
+			year: '2024',
+			duration: '4 jours',
+		},
+		{
+			title: 'Dashboard prototypé v2',
+			description: 'Réalisation d\'une maquette de dashbaord afin de gérer ses comptes bancaires. Ce projet a été réalisé seulement dans le but d\'améliorer mes compétences en UX/UI Design avec Figma.',
+			imageUrl: '/images/projets/Dashboardv2/image1.png',
+			technologies: ['Figma'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/Dashboardv2/image2.png' },
+			],
+			year: '2024 (1ère année de formation)',
+			client: 'IUT de Meaux',
+			duration: '1 semaine',
+			role: 'UX/UI Designer',
+			buttons: [
+				{ label: 'Voir les maquettes', link: "https://www.figma.com/design/yngEJ6UTT0H3C79rb33ITP/DACOSTA_Timeo_Maquette_Prototype?node-id=37-181&t=DMlVbQbkOlAwFMSv-1", type: 'primary' }
+			]
+		},
+		{
+			title: 'Dashboard prototypé',
+			description: 'Réalisation d\'une maquette de dashbaord afin de voir le nombre de téléchargement d\'une application. Ce projet a été réalisé seulement dans le but d\'améliorer mes compétences en UX/UI Design avec Figma.',
+			imageUrl: '/images/projets/Dashboard/image1.png',
+			technologies: ['Figma'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/Dashboard/image2.png' },
+			],
+			year: '2024 (1ère année de formation)',
+			client: 'IUT de Meaux',
+			duration: '1 semaine',
+			role: 'UX/UI Design',
+			challenge: 'Le challenge de ce projet était de prototypé cette maquette. En effet, lors de ce projet, je découvrais Figma et j\'ai essayé de prototypé cette maquette avant d\'avoir eu la formation pour le faire. Or, ce n\'était pas la bonne méthode... Comme vous pouvez le voir il y a un petit problème si vous aller sur le lien Figma ! Je me permets tout de même de le partager afin de voir mon évolution entre la première et la deuxième année de ma formation.',
+			buttons: [
+				{ label: 'Voir les maquettes', link: "https://www.figma.com/design/Kc5au4TZan3gSAkZefvl4U/Dashboard?node-id=0-1&t=1zs9yfDL504RjRwZ-1", type: 'primary' }
+			]
+		},
+		{
+			title: 'Webdocumentaire - Face Lumière',
+			description: 'Réalisation d\'un site Webdocumentaire. En effet, nous avons réalisé ce site Internet en groupe de deux dans lequel nous exposons le sujet des énergies renouvelables. Nous avons réalisé une interview avec un professionnel qui exerce ce métier.',
+			imageUrl: '/images/projets/Webdoc/image1.png',
+			technologies: ['HTML', 'CSS', 'JS', 'Premier Pro', 'Photoshop', 'Illustrator', 'Git', 'GitHub', 'Bootstrap'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/Webdoc/image2.png' },
+				{ type: 'image', url: '/images/projets/Webdoc/image3.png' },
+				{ type: 'image', url: '/images/projets/Webdoc/image4.png' },
+				{ type: 'video', url: 'https://app.videas.fr/embed/media/702006d0-6c3c-471d-a32c-4af1d78902bc/', thumbnailUrl: "/images/projets/Webdoc/image1.png" },
+			],
+			year: '2024 (1ère année de formation)',
+			client: 'IUT de Meaux',
+			duration: '1 semaine',
+			role: 'FrontEnd + Chef de projet',
+			buttons: [
+				{ label: 'Voir le site', link: "https://webdoc-energierenouvelable.vercel.app/", type: 'primary' }
+			]
+		},
+		{
+			title: 'Blender - Corvette Animation',
+			description: 'Réalisation d\'une animation présentant une Corvette. Ce projet avait pour but d\'améliorer mes compétences en 3D.',
+			imageUrl: '/images/projets/Corvette/image1.png',
+			technologies: ['Blender'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/Corvette/image2.png' },
+				{ type: 'video', url: 'https://app.videas.fr/embed/media/11e52ddd-1ed4-41a8-9a96-b5db83bcd19e/', thumbnailUrl: '/images/projets/Corvette/image1.png' },
+			],
+			year: '2024',
+			duration: '1 semaine',
+		},
+		{
+			title: 'GIF - GTA VI',
+			description: 'Réalisation d\'un GIF simulant GTA VI.',
+			imageUrl: '/images/projets/Gif/image1.png',
+			technologies: ['Photoshop'],
+			gallery: [
+				{ type: 'video', url: '/images/projets/Gif/video1.mp4', thumbnailUrl: '/images/projets/Gif/image1.png', isGif: true },
+			],
+			year: '2024 (1ère année de formation)',
+			challenge: 'Le challenge de ce projet était d\'apprendre à faire un GIF sur Photoshop.',
+			client: 'IUT de Meaux',
+			duration: '2 jours',
+			role: 'Designer',
 		},
 	];
 
@@ -353,7 +445,7 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 
 		project.gallery.forEach(item => {
 			if (item.url !== mainMedia.url) {
-				if (item.type === 'video' && typeof item.url === 'string') {
+				if (item.type === 'video' && typeof item.url === 'string' && !item.isGif) {
 					allMedia.push({
 						...item,
 						url: this.sanitizer.bypassSecurityTrustResourceUrl(item.url)

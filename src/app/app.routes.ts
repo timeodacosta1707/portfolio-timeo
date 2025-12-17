@@ -1,14 +1,19 @@
 import { Routes } from '@angular/router';
 import { Projects } from './components/projects/projects';
-import { Accueil } from './components/accueil/accueil'; // Assure-toi d'importer ton composant Accueil
+import { Accueil } from './components/accueil/accueil';
+import { About } from './components/about/about';
 
 export const routes: Routes = [
     {
-        path: '', // Chemin vide = page d'accueil par défaut
+        path: '',
         component: Accueil
     },
     {
         path: 'projects',
         component: Projects
+    },
+    {
+        path: 'about',
+        component: About
     }
 ];

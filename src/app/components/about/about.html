@@ -1,0 +1,60 @@
+<section class="about-fullscreen">
+    <div class="overlay"></div>
+    
+    <div class="content-wrapper">
+        <div class="title-block">
+            <h1>À PROPOS</h1>
+            <h1>DE MOI</h1>
+        </div>
+
+        <div class="bio-block">
+            <h2>{{ bioTitle }}</h2>
+            <div class="separator"></div>
+            <p>{{ bioDescription }}</p>
+        </div>
+    </div>
+
+    <div class="scroll-down">
+        <span>SCROLL</span>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="timeline-section">
+    <h2 class="timeline-title">MON PARCOURS</h2>
+    
+    <div class="timeline-container">
+        <div class="timeline-path"></div>
+
+        @for (item of timelineData; track $index) {
+            <div class="timeline-item" 
+                 [class.left]="$index % 2 === 0" 
+                 [class.right]="$index % 2 !== 0"
+                 [style.animation-delay]="$index * 0.2 + 's'">
+                
+                <div class="timeline-content">
+                    <span class="year">{{ item.year }}</span>
+                    <h3>{{ item.title }}</h3>
+                    @if(item.location) {
+                        <span class="location">{{ item.location }}</span>
+                    }
+                    <p>{{ item.description }}</p>
+                </div>
+                
+                <div class="connector"></div>
+
+                <div class="timeline-dot"></div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-content">
+        <h2>UNE IDÉE EN TÊTE ?</h2>
+        <a href="mailto:ton.email@exemple.com" class="cta-btn">
+            <span>ME CONTACTER</span>
+            <div class="hover-effect"></div>
+        </a>
+    </div>
+</section>
