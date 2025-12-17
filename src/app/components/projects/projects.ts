@@ -1,17 +1,21 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, NgZone, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectCard } from '../project-card/project-card';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-export interface ProjectImage {
-	url: string;
-	isMaquette: boolean;
+export interface ProjectMedia {
+	type: 'image' | 'video';
+	url: string | SafeResourceUrl;
+	thumbnailUrl?: string;
+	isMaquette?: boolean;
 }
 
 interface ProjectButton {
 	label: string;
 	link: string;
 	type: 'primary' | 'secondary';
+	disabled?: boolean
 }
 
 interface ProjectData {
@@ -24,7 +28,7 @@ interface ProjectData {
 	year?: string;
 	role?: string;
 	technologies: string[];
-	gallery: ProjectImage[];
+	gallery: ProjectMedia[];
 	challenge?: string;
 	buttons?: ProjectButton[];
 }
@@ -40,8 +44,11 @@ type TrackType = 'top' | 'bottom' | null;
 })
 export class Projects implements OnInit, AfterViewInit, OnDestroy {
 
+	private sanitizer = inject(DomSanitizer);
+
 	@ViewChild('trackTop') trackTop!: ElementRef<HTMLElement>;
 	@ViewChild('trackBottom') trackBottom!: ElementRef<HTMLElement>;
+	@ViewChild('thumbnailList') thumbnailList!: ElementRef<HTMLElement>;
 
 	readonly CARD_WIDTH_DESKTOP = 550;
 	readonly CARD_WIDTH_MOBILE = 300;
@@ -55,9 +62,9 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 			client: "IUT de Meaux",
 			technologies: ['HTML', 'CSS', 'JS', 'PHP', 'Git', 'GitHub'],
 			gallery: [
-				{ url: '/images/projets/VPTours/image2.png', isMaquette: false },
-				{ url: '/images/projets/VPTours/image3.png', isMaquette: false },
-				{ url: '/images/projets/VPTours/image4.png', isMaquette: false }
+				{ type: 'image', url: '/images/projets/VPTours/image2.png', isMaquette: false },
+				{ type: 'image', url: '/images/projets/VPTours/image3.png', isMaquette: false },
+				{ type: 'image', url: '/images/projets/VPTours/image4.png', isMaquette: false }
 			],
 			year: '2024 (1ère année de formation)',
 			role: 'Développeur Front',
@@ -72,12 +79,12 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 			imageUrl: '/images/projets/Saturne/image1.svg',
 			technologies: ['Figma', 'Photoshop', 'Illustrator'],
 			gallery: [
-				{ url: '/images/projets/Saturne/image2.png', isMaquette: false },
-				{ url: '/images/projets/Saturne/image3.png', isMaquette: true },
-				{ url: '/images/projets/Saturne/image4.png', isMaquette: true },
-				{ url: '/images/projets/Saturne/image5.png', isMaquette: true },
-				{ url: '/images/projets/Saturne/image6.png', isMaquette: true },
-				{ url: '/images/projets/Saturne/image7.png', isMaquette: true }
+				{ type: 'image', url: '/images/projets/Saturne/image2.png', isMaquette: false },
+				{ type: 'image', url: '/images/projets/Saturne/image3.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Saturne/image4.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Saturne/image5.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Saturne/image6.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Saturne/image7.png', isMaquette: true }
 			],
 			year: '2025 (2ème année de formation)',
 			role: 'UX/UI Designer',
@@ -90,25 +97,63 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 			client: "IUT de Meaux"
 		},
 		{
-			title: 'Dashboard Admin',
-			description: 'Data visualization.',
-			imageUrl: 'assets/images/projet3.jpg',
-			technologies: ['React', 'D3.js'],
-			gallery: [{ url: 'assets/images/projet3.jpg', isMaquette: false }],
-			year: '2023',
-			role: 'Fullstack',
-			duration: '4 mois'
+			title: 'Site de réservation de matériel',
+			description: 'Conception d\'un site web dédié à la réservation de matériel et de salles de cours. L\'objectif était de remplacer un système organisationnel défaillant par une solution centralisée, permettant aux étudiants de planifier leurs projets universitaires en toute autonomie.',
+			imageUrl: '/images/projets/Reservation/image1.png',
+			technologies: ['HTML', 'CSS', 'JS', 'PHP', 'Bootstrap', 'MySQL', 'Git', 'GitHub'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/Reservation/image2.png', isMaquette: false },
+				{ type: 'image', url: '/images/projets/Reservation/image3.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Reservation/image4.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Reservation/image5.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Reservation/image6.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Reservation/image7.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Reservation/image8.png', isMaquette: true },
+			],
+			year: '2024 (1ère année de formation)',
+			role: 'Dev. FS + Chef de projet',
+			duration: '2 mois',
+			client: "IUT de Meaux",
+			challenge: "Lier une base de données à ce site était le challenge de ce projet. En effet, il était important de centraliser les données de sorte à pouvoir les récupérer de manière efficace et sécurisé pour faire fonctionner par exemple le système de connexion et d'inscription.",
+			buttons: [
+				{ label: "Voir le site", link: "https://gestiondesmateriel.alwaysdata.net/", type: "primary" }
+			]
 		},
 		{
-			title: 'E-commerce Shop',
-			description: 'Vente en ligne.',
-			imageUrl: 'assets/images/projet4.svg',
-			technologies: ['Shopify', 'Liquid'],
-			gallery: [{ url: 'assets/images/projet4.jpg', isMaquette: false }],
-			year: '2024',
-			role: 'Frontend',
-			duration: '1 mois'
-		}
+			title: 'Kinetic Animation',
+			description: 'Réalisation d\'une animation kinetic sur la musique \'Dior - POP SMOKE\'',
+			imageUrl: '/images/projets/Kinetic/image1.png',
+			technologies: ['AfterEffects'],
+			gallery: [
+				{ type: 'video', url: 'https://app.videas.fr/embed/media/827c48b0-bf19-47e7-8ef8-2546b17ae18d/', thumbnailUrl: '/images/projets/Kinetic/image1.png' },
+			],
+			year: '2025 (2ème année de formation)',
+			duration: '1 semaine'
+		},
+		{
+			title: 'SAKANA - Application Web de restauration',
+			description: 'Réalisation d\'une application Web de restauration de sushi. Ce projet avait pour but de réaliser une site internet afin de commander des sushis.',
+			imageUrl: '/images/projets/Sakana/image1.svg',
+			technologies: ['Angular', 'HTML', 'TypeScript', 'MySQL', 'PHP', 'Git', 'GitHub'],
+			gallery: [
+				{ type: 'image', url: '/images/projets/Sakana/image2.svg' },
+				{ type: 'image', url: '/images/projets/Sakana/image3.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Sakana/image4.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Sakana/image5.png', isMaquette: true },
+				{ type: 'image', url: '/images/projets/Sakana/image6.png' },
+				{ type: 'image', url: '/images/projets/Sakana/image7.png' },
+				{ type: 'image', url: '/images/projets/Sakana/image8.png' },
+				{ type: 'image', url: '/images/projets/Sakana/image9.png' },
+				{ type: 'image', url: '/images/projets/Sakana/image10.png' },
+				{ type: 'image', url: '/images/projets/Sakana/image11.png' },
+			],
+			role: "UX/UI Designer + Dev FrontEnd",
+			year: '2025 (2ème année de formation)',
+			duration: '2 mois',
+			buttons: [
+				{ label: "Voir le site (A venir)", link: "A venir", type: "primary", disabled: true }
+			]
+		},
 	];
 
 	projectsTop: ProjectData[] = [];
@@ -116,8 +161,8 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 
 	selectedProject: ProjectData | null = null;
 
-	activeGalleryImage: ProjectImage | null = null;
-	projectImages: ProjectImage[] = [];
+	activeGalleryMedia: ProjectMedia | null = null;
+	projectMediaList: ProjectMedia[] = [];
 
 	maquetteTransform: string = 'translateY(0)';
 
@@ -130,8 +175,8 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 	resumeTimeoutTop: any;
 	resumeTimeoutBottom: any;
 
-	topTrackState = { pos: 0, direction: -1, isPaused: false };
-	bottomTrackState = { pos: 0, direction: 1, isPaused: false };
+	topTrackState = { pos: 0, direction: -1, isPaused: false, isHovered: false };
+	bottomTrackState = { pos: 0, direction: 1, isPaused: false, isHovered: false };
 
 	constructor(
 		private ngZone: NgZone,
@@ -161,6 +206,21 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 
+	scrollThumbnails(direction: 'left' | 'right') {
+		if (!this.thumbnailList?.nativeElement) return;
+
+		const container = this.thumbnailList.nativeElement;
+		const itemWidth = 100;
+		const gap = 15;
+		const scrollAmount = (itemWidth + gap) * 3;
+
+		if (direction === 'left') {
+			container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+		} else {
+			container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		}
+	}
+
 	ensureInfiniteLoop(list: ProjectData[], target: 'top' | 'bottom') {
 		let safeList = [...list];
 		while (safeList.length < 5) {
@@ -188,20 +248,30 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 			return;
 		}
 
-		if (this.activeDragTrack !== 'top' && !this.topTrackState.isPaused) {
+		if (this.activeDragTrack !== 'top' && !this.topTrackState.isPaused && !this.topTrackState.isHovered) {
 			if (this.trackTop) {
 				this.topTrackState.pos += this.speedBase * this.topTrackState.direction;
 				this.applyTransform(this.trackTop.nativeElement, this.topTrackState.pos, this.projectsTop.length);
 			}
 		}
 
-		if (this.activeDragTrack !== 'bottom' && !this.bottomTrackState.isPaused) {
+		if (this.activeDragTrack !== 'bottom' && !this.bottomTrackState.isPaused && !this.bottomTrackState.isHovered) {
 			if (this.trackBottom) {
 				this.bottomTrackState.pos += this.speedBase * this.bottomTrackState.direction;
 				this.applyTransform(this.trackBottom.nativeElement, this.bottomTrackState.pos, this.projectsBottom.length);
 			}
 		}
 		this.animationId = requestAnimationFrame(() => this.animate());
+	}
+
+	onTrackHover(track: TrackType, isHovering: boolean) {
+		if (this.activeDragTrack === track) return;
+
+		if (track === 'top') {
+			this.topTrackState.isHovered = isHovering;
+		} else if (track === 'bottom') {
+			this.bottomTrackState.isHovered = isHovering;
+		}
 	}
 
 	applyTransform(element: HTMLElement, position: number, listLength: number) {
@@ -273,20 +343,29 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 	openProjectDetail(project: ProjectData) {
 		this.selectedProject = project;
 
-		const mainImg: ProjectImage = {
+		const mainMedia: ProjectMedia = {
+			type: 'image',
 			url: project.imageUrl,
 			isMaquette: project.isMainImageMaquette || false
 		};
 
-		const allImages: ProjectImage[] = [mainImg];
-		project.gallery.forEach(img => {
-			if (img.url !== mainImg.url) {
-				allImages.push(img);
+		const allMedia: ProjectMedia[] = [mainMedia];
+
+		project.gallery.forEach(item => {
+			if (item.url !== mainMedia.url) {
+				if (item.type === 'video' && typeof item.url === 'string') {
+					allMedia.push({
+						...item,
+						url: this.sanitizer.bypassSecurityTrustResourceUrl(item.url)
+					});
+				} else {
+					allMedia.push(item);
+				}
 			}
 		});
 
-		this.projectImages = allImages;
-		this.setActiveImage(mainImg);
+		this.projectMediaList = allMedia;
+		this.setActiveMedia(mainMedia);
 
 		window.scrollTo(0, 0);
 	}
@@ -297,31 +376,33 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 		window.scrollTo(0, 0);
 	}
 
-	setActiveImage(img: ProjectImage) {
-		this.activeGalleryImage = img;
+	setActiveMedia(media: ProjectMedia) {
+		this.activeGalleryMedia = media;
 		this.maquetteTransform = 'translateY(0)';
 	}
 
-	onMaquetteMouseMove(event: MouseEvent, container: HTMLElement, img: HTMLElement) {
+	onMaquetteMouseMove(event: MouseEvent, container: HTMLElement) {
 		if (window.innerWidth <= 1024) return;
-	
-		if (!this.activeGalleryImage?.isMaquette) return;
-	
+		if (this.activeGalleryMedia?.type !== 'image' || !this.activeGalleryMedia?.isMaquette) return;
+
+		const img = container.querySelector('.main-img') as HTMLElement;
+		if (!img) return;
+
 		const containerHeight = container.offsetHeight;
 		const imgHeight = img.offsetHeight;
-	
+
 		if (imgHeight <= containerHeight) {
 			this.maquetteTransform = 'translateY(0)';
 			return;
 		}
-	
+
 		const rect = container.getBoundingClientRect();
 		const mouseY = event.clientY - rect.top;
-	
+
 		const percentage = Math.max(0, Math.min(1, mouseY / containerHeight));
 		const maxTranslate = imgHeight - containerHeight;
 		const translateValue = percentage * maxTranslate;
-	
+
 		this.maquetteTransform = `translateY(-${translateValue}px)`;
 	}
 
