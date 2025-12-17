@@ -19,9 +19,19 @@ export class Technologies {
 
 	technologies: Tech[] = [
 		{
+			name: "After Effects",
+			icon: "/svg/icons/after-effects.svg",
+			description: "En dehors du développement, After Effects est mon terrain de jeu créatif. Je l'utilise sur mon temps libre pour réaliser des projets de Motion Design et de composition vidéo, me permettant d'explorer une autre facette de la création numérique purement artistique."
+		},
+		{
 			name: "Angular",
 			icon: "/svg/icons/angular.svg",
 			description: "Framework de référence pour le front-end, Angular est mon outil de prédilection pour créer des Single Page Applications (SPA). Il me permet de développer des interfaces fluides et réactives (via RxJS), offrant une navigation instantanée sans rechargement de page."
+		},
+		{
+			name: "Blender",
+			icon: "/svg/icons/blender.svg",
+			description: "Blender est l'outil qui nourrit ma fascination pour la 3D. Je l'utilise exclusivement dans un cadre personnel pour explorer la modélisation et le rendu. C'est un univers qui me passionne par sa complexité et la possibilité de créer des mondes virtuels à partir de rien."
 		},
 		{
 			name: "Bootstrap",
@@ -87,6 +97,11 @@ export class Technologies {
 			name: "PHP",
 			icon: "/svg/icons/php.svg",
 			description: "PHP est mon langage de référence pour le script côté serveur. Je l'utilise pour gérer les interactions sécurisées avec la base de données, l'authentification des utilisateurs et la génération dynamique de contenu, assurant la stabilité fonctionnelle de mes applications."
+		},
+		{
+			name: "Premier Pro",
+			icon: "/svg/icons/premier-pro.svg",
+			description: "Premiere Pro est mon outil de prédilection pour le montage vidéo. Je l'utilise sur mon temps libre pour assembler des séquences, rythmer des récits et réaliser des projets personnels, ce qui me permet d'exprimer ma créativité à travers un autre média que le code."
 		},
 		{
 			name: "Python",

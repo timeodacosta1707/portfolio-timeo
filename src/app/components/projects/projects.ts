@@ -53,7 +53,7 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 			description: 'Conception d\'un site web touristique statique en utilisant HTML/CSS/JS.',
 			imageUrl: '/images/projets/VPTours/image1.png',
 			client: "IUT de Meaux",
-			technologies: ['HTML', 'CSS', 'JS', 'PHP'],
+			technologies: ['HTML', 'CSS', 'JS', 'PHP', 'Git', 'GitHub'],
 			gallery: [
 				{ url: '/images/projets/VPTours/image2.png', isMaquette: false },
 				{ url: '/images/projets/VPTours/image3.png', isMaquette: false },
