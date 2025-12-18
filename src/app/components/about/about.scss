@@ -94,7 +94,6 @@
     }
 }
 
-/* --- TIMELINE SECTION --- */
 .timeline-section {
     background-color: #101010;
     padding: 100px 0;
@@ -341,7 +340,6 @@
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* --- VISION SECTION --- */
 .vision-section {
     background-color: #0d0d0d;
     padding: 150px 80px;
@@ -438,7 +436,6 @@
     }
 }
 
-/* --- INTERESTS SECTION (ELASTIC PANELS WITH IMAGES) --- */
 .interests-section {
     background-color: #101010;
     padding: 120px 80px 150px 80px;
@@ -476,7 +473,6 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         background-color: #161616;
         
-        /* --- IMAGE CONTAINER --- */
         .panel-images {
             position: absolute;
             top: 0;
@@ -495,17 +491,13 @@
                 background-position: center;
                 opacity: 0;
                 transition: opacity 0.5s ease, filter 0.5s ease;
-                filter: grayscale(100%); /* Noir et blanc par défaut */
+                filter: grayscale(100%);
                 
-                /* Si on a plus d'une image, on lance l'animation de diaporama par défaut */
                 &:nth-child(n) {
-                    /* Durée totale = nombre d'images * 3 secondes */
                     animation: slideshow calc(var(--total-images) * 3s) infinite;
-                    /* Délai = index de l'image * 3 secondes */
                     animation-delay: calc(var(--img-index) * 3s);
                 }
                 
-                /* Cas particulier : si une seule image, elle reste affichée à 40% d'opacité */
                 &:only-child {
                     opacity: 0.4;
                     animation: none;
@@ -513,7 +505,6 @@
             }
         }
 
-        /* --- GRADIENT OVERLAY (Pour la lisibilité) --- */
         .panel-overlay {
             position: absolute;
             top: 0;
@@ -525,7 +516,6 @@
             transition: background 0.4s;
         }
 
-        /* --- CONTENT --- */
         .panel-content {
             position: absolute;
             bottom: 0;
@@ -589,15 +579,13 @@
             transition: transform 0.4s, color 0.4s;
         }
 
-        /* --- HOVER STATE (Animation & Expansion) --- */
         &:hover {
             flex: 3;
             border-color: #6F040E;
 
             .panel-images .bg-img {
-                filter: grayscale(0%); /* Retour de la couleur au hover */
+                filter: grayscale(0%);
                 
-                /* Cas particulier : si une seule image, on augmente l'opacité au hover */
                 &:only-child {
                     opacity: 0.6;
                 }

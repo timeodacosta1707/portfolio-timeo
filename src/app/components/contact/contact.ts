@@ -20,8 +20,6 @@ export class Contact {
 	contactForm: FormGroup;
 	email = "dacostatimeo@gmail.com";
 	isSubmitting = false;
-
-	// Nouvel état pour gérer l'affichage (Formulaire, Succès ou Erreur)
 	formStatus: 'IDLE' | 'SUCCESS' | 'ERROR' = 'IDLE';
 
 	socials: SocialLink[] = [
@@ -49,7 +47,6 @@ export class Contact {
 			};
 
 			try {
-				// Envoi via EmailJS
 				await emailjs.send(
 					'service_volmlf4',
 					'template_4nlfsfa',
@@ -57,14 +54,12 @@ export class Contact {
 					'fzwerqjK-xrZoDAyA'
 				);
 
-				// Succès : on change l'état pour afficher le message de remerciement
 				this.formStatus = 'SUCCESS';
 				this.contactForm.reset();
 				this.isSubmitting = false;
 
 			} catch (error) {
 				console.error('Erreur d\'envoi:', error);
-				// Erreur : on affiche le message d'erreur
 				this.formStatus = 'ERROR';
 				this.isSubmitting = false;
 			}
@@ -73,7 +68,6 @@ export class Contact {
 		}
 	}
 
-	// Fonction pour revenir au formulaire (après succès ou erreur)
 	resetFormState() {
 		this.formStatus = 'IDLE';
 		this.isSubmitting = false;

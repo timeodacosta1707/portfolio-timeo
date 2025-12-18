@@ -260,11 +260,10 @@
             }
         }
 
-        // --- SECTION MODIFIÉE POUR LES MINIATURES ---
         .thumbnails-container {
             display: flex;
             align-items: center;
-            justify-content: center; // Centre si moins de 6 items
+            justify-content: center;
             width: 100%;
             position: relative;
             gap: 10px;
@@ -296,19 +295,13 @@
             }
 
             .thumbnails {
-                // IMPORTANT : Permet de gérer le défilement
                 display: flex;
                 gap: 15px;
                 overflow-x: hidden;
                 scroll-behavior: smooth;
                 align-items: center;
-
-                // IMPORTANT : Limite la largeur pour forcer le scroll si > 6 items
-                // (6 items * 100px) + (5 gaps * 15px) = 675px
                 max-width: 675px;
                 width: max-content;
-
-                // Cache scrollbars
                 scrollbar-width: none;
 
                 &::-webkit-scrollbar {
@@ -520,7 +513,6 @@
                     }
                 }
 
-                // --- MODIFICATION ICI : Style désactivé ---
                 &.disabled {
                     opacity: 0.4;
                     cursor: not-allowed;
@@ -537,7 +529,6 @@
     }
 }
 
-// ... (Le reste du fichier inchangé)
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -603,13 +594,12 @@
 
             .thumbnails-container {
 
-                // Sur mobile, on cache les flèches, on laisse le scroll tactile
                 .nav-arrow {
                     display: none;
                 }
 
                 .thumbnails {
-                    max-width: 100%; // Pleine largeur sur mobile
+                    max-width: 100%;
                     overflow-x: auto;
                     justify-content: flex-start;
                     padding-bottom: 5px;
@@ -676,7 +666,6 @@
     position: relative;
     overflow: hidden;
 
-    // Ligne décorative subtile en haut
     &::before {
         content: '';
         position: absolute;
@@ -737,7 +726,7 @@
                 left: 0;
                 width: 0%;
                 height: 100%;
-                background-color: #6F040E; // Ta couleur rouge
+                background-color: #6F040E;
                 z-index: 1;
                 transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             }

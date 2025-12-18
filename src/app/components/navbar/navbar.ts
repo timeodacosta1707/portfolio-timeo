@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Important pour [class.open]
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'app-navbar',

@@ -50,7 +50,6 @@
                     font-family: "Anton-Regular";
                     transition: all 0.3s ease;
 
-                    /* FIX : L'état actif est imbriqué ici pour avoir la priorité */
                     &.active-link {
                         color: #ffffff;
                     }
@@ -141,7 +140,6 @@
                 text-decoration: none;
                 transition: all 0.3s ease;
 
-                /* FIX : Ajouté également ici pour les liens du bas */
                 &.active-link {
                     color: #ffffff;
                 }
