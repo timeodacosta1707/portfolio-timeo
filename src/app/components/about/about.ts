@@ -119,4 +119,13 @@ export class About {
 			]
 		}
 	];
+
+	downloadCV(): void {
+		const link = document.createElement('a');
+		link.href = '/PDF/CV_Timeo_DACOSTA.pdf';
+		link.download = 'CV_Timeo_DACOSTA.pdf';
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	}
 }
